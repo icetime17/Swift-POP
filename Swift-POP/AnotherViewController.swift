@@ -261,6 +261,37 @@ extension V2EXNode: Decodable {
 }
 
 
+// MARK: - V2EX的最新
+// https://www.v2ex.com/api/topics/latest.json
+
+private struct V2EXLatest {
+    let topics: [[String: Any]]
+    
+    init?(data: Data) {
+        guard let topics = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else { return nil }
+        
+        self.topics = topics!
+    }
+    
+}
+
+private struct V2EXLatestRequest: Request {
+    typealias Response = V2EXLatest
+    
+    let host: String = "https://www.v2ex.com"
+    var path: String {
+        return "/api/topics/latest.json"
+    }
+    let method: HTTPMethod = .GET
+    let parameter: [String : Any] = [:]
+}
+
+extension V2EXLatest: Decodable {
+    static func parse(data: Data) -> V2EXLatest? {
+        return V2EXLatest(data: data)
+    }
+}
+
 
 
 
@@ -315,6 +346,14 @@ class AnotherViewController: UIViewController {
         URLSessionClient.request(v2exNodeRequest) { (response) in
             if let v2exNode = response {
                 print(v2exNode)
+            }
+        }
+        
+        
+        let v2exLastestRequest = V2EXLatestRequest()
+        URLSessionClient.request(v2exLastestRequest) { (response) in
+            if let v2exLastest = response {
+                print(v2exLastest)
             }
         }
     }
