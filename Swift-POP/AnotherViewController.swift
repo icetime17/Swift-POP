@@ -79,7 +79,8 @@ private protocol Request {
     
     func rquestInfo()
     
-    func parseResponse(data: Data)
+    // 不需要单独的parse方法了
+//    func parseResponse(data: Data)
 }
 
 private struct GithubUserInfoRequest: Request {
@@ -102,22 +103,27 @@ private struct GithubUserInfoRequest: Request {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let data = data {
-                self.parseResponse(data: data)
+//                self.parseResponse(data: data)
+                if let userInfo = Response.parse(data: data) {
+                    print(">>>>>>")
+                    print(userInfo)
+                    print(">>>>>>\n")
+                }
             }
         }
         task.resume()
     }
     
-    func parseResponse(data: Data) {
-//        let userInfo = GithubUserInfo(data: data)
-//        print(userInfo)
-        
-        if let userInfo = Response.parse(data: data) {
-            print(">>>>>>")
-            print(userInfo)
-            print(">>>>>>\n")
-        }
-    }
+//    func parseResponse(data: Data) {
+////        let userInfo = GithubUserInfo(data: data)
+////        print(userInfo)
+//        
+//        if let userInfo = Response.parse(data: data) {
+//            print(">>>>>>")
+//            print(userInfo)
+//            print(">>>>>>\n")
+//        }
+//    }
 }
 
 
@@ -139,22 +145,27 @@ private struct HttpBinInfoRequest: Request {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let data = data {
-                self.parseResponse(data: data)
+//                self.parseResponse(data: data)
+                if let userInfo = Response.parse(data: data) {
+                    print(">>>>>>")
+                    print(userInfo)
+                    print(">>>>>>\n")
+                }
             }
         }
         task.resume()
     }
     
-    func parseResponse(data: Data) {
-        //        let httpBinInfo = HttpBinInfo(data: data)
-        //        print(httpBinInfo)
-        
-        if let httpBinInfo = Response.parse(data: data) {
-            print(">>>>>>")
-            print(httpBinInfo)
-            print(">>>>>>\n")
-        }
-    }
+//    func parseResponse(data: Data) {
+//        //        let httpBinInfo = HttpBinInfo(data: data)
+//        //        print(httpBinInfo)
+//        
+//        if let httpBinInfo = Response.parse(data: data) {
+//            print(">>>>>>")
+//            print(httpBinInfo)
+//            print(">>>>>>\n")
+//        }
+//    }
 }
 
 
