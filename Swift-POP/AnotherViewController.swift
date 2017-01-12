@@ -219,6 +219,51 @@ extension HttpBinInfo: Decodable {
 }
 
 
+// MARK: - 扩展V2EX的API使用
+
+//https://www.v2ex.com/api/nodes/show.json?name=swift
+private struct V2EXNode {
+    let name: String
+    let url: String
+    let topics: Int
+    
+    init?(data: Data) {
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return nil }
+        
+        guard let name      = json?["name"] as? String else { return nil }
+        guard let url       = json?["url"] as? String else { return nil }
+        guard let topics    = json?["topics"] as? Int else { return nil }
+        
+        self.name   = name
+        self.url    = url
+        self.topics = topics
+    }
+    
+}
+
+private struct V2EXNodeRequest: Request {
+    typealias Response = V2EXNode
+    
+    let name: String
+    
+    let host: String = "https://www.v2ex.com"
+    var path: String {
+        return "/api/nodes/show.json?name=\(name)"
+    }
+    let method: HTTPMethod = .GET
+    let parameter: [String : Any] = [:]
+}
+
+extension V2EXNode: Decodable {
+    static func parse(data: Data) -> V2EXNode? {
+        return V2EXNode(data: data)
+    }
+}
+
+
+
+
+
 class AnotherViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -236,7 +281,7 @@ class AnotherViewController: UIViewController {
          */
         
         
-        var userInfoRequest = GithubUserInfoRequest(name: "onevcat")
+        let userInfoRequest = GithubUserInfoRequest(name: "onevcat")
 //        userInfoRequest.rquestInfo()
         URLSessionClient.request(userInfoRequest) { (response) in
             if let githubUserInfo = response {
@@ -257,14 +302,21 @@ class AnotherViewController: UIViewController {
         }
         */
         
-        var httpBinRequest = HttpBinInfoRequest()
+        let httpBinRequest = HttpBinInfoRequest()
 //        httpBinRequest.rquestInfo()
         URLSessionClient.request(httpBinRequest) { (response) in
             if let httpBinInfo = response {
                 print(httpBinInfo)
             }
         }
+     
         
+        let v2exNodeRequest = V2EXNodeRequest(name: "swift")
+        URLSessionClient.request(v2exNodeRequest) { (response) in
+            if let v2exNode = response {
+                print(v2exNode)
+            }
+        }
     }
     
 }
