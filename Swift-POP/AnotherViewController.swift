@@ -77,12 +77,13 @@ private protocol Request {
     // 要针对不同的结构体或类指定不同的Response，类似泛型功能
     associatedtype Response: Decodable
     
-    func rquestInfo()
+//    func rquestInfo()
     
     // 不需要单独的parse方法了
 //    func parseResponse(data: Data)
 }
 
+// 如何将request分离
 private struct GithubUserInfoRequest: Request {
     // 指定在该struct中，Response即为GithubUserInfo
     typealias Response = GithubUserInfo
@@ -96,23 +97,23 @@ private struct GithubUserInfoRequest: Request {
     let method: HTTPMethod = .GET
     let parameter: [String : Any] = [:]
     
-    func rquestInfo() {
-        let url = URL(string: "\(host)\(path)")
-        var request = URLRequest(url: url!)
-        request.httpMethod = method.rawValue
-        
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let data = data {
-//                self.parseResponse(data: data)
-                if let userInfo = Response.parse(data: data) {
-                    print(">>>>>>")
-                    print(userInfo)
-                    print(">>>>>>\n")
-                }
-            }
-        }
-        task.resume()
-    }
+//    func rquestInfo() {
+//        let url = URL(string: "\(host)\(path)")
+//        var request = URLRequest(url: url!)
+//        request.httpMethod = method.rawValue
+//        
+//        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+//            if let data = data {
+////                self.parseResponse(data: data)
+//                if let userInfo = Response.parse(data: data) {
+//                    print(">>>>>>")
+//                    print(userInfo)
+//                    print(">>>>>>\n")
+//                }
+//            }
+//        }
+//        task.resume()
+//    }
     
 //    func parseResponse(data: Data) {
 ////        let userInfo = GithubUserInfo(data: data)
@@ -138,23 +139,23 @@ private struct HttpBinInfoRequest: Request {
     let method: HTTPMethod = .GET
     let parameter: [String : Any] = [:]
     
-    func rquestInfo() {
-        let url = URL(string: "\(host)\(path)")
-        var request = URLRequest(url: url!)
-        request.httpMethod = method.rawValue
-        
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let data = data {
-//                self.parseResponse(data: data)
-                if let userInfo = Response.parse(data: data) {
-                    print(">>>>>>")
-                    print(userInfo)
-                    print(">>>>>>\n")
-                }
-            }
-        }
-        task.resume()
-    }
+//    func rquestInfo() {
+//        let url = URL(string: "\(host)\(path)")
+//        var request = URLRequest(url: url!)
+//        request.httpMethod = method.rawValue
+//        
+//        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+//            if let data = data {
+////                self.parseResponse(data: data)
+//                if let userInfo = Response.parse(data: data) {
+//                    print(">>>>>>")
+//                    print(userInfo)
+//                    print(">>>>>>\n")
+//                }
+//            }
+//        }
+//        task.resume()
+//    }
     
 //    func parseResponse(data: Data) {
 //        //        let httpBinInfo = HttpBinInfo(data: data)
@@ -166,6 +167,33 @@ private struct HttpBinInfoRequest: Request {
 //            print(">>>>>>\n")
 //        }
 //    }
+}
+
+
+private protocol Client {
+    // 将requestInfo方法分离出来
+    static func request<T: Request>(_ req: T, handler: @escaping (T.Response?) -> Void)
+}
+
+private struct URLSessionClient: Client {
+    static func request<T : Request>(_ req: T, handler: @escaping (T.Response?) -> Void) {
+        let url = URL(string: "\(req.host)\(req.path)")
+        var urlRequest = URLRequest(url: url!)
+        urlRequest.httpMethod = req.method.rawValue
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let data = data, let res = T.Response.parse(data: data) {
+                DispatchQueue.main.async {
+                    handler(res)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    handler(nil)
+                }
+            }
+        }
+        task.resume()
+    }
 }
 
 
@@ -209,7 +237,12 @@ class AnotherViewController: UIViewController {
         
         
         var userInfoRequest = GithubUserInfoRequest(name: "onevcat")
-        userInfoRequest.rquestInfo()
+//        userInfoRequest.rquestInfo()
+        URLSessionClient.request(userInfoRequest) { (response) in
+            if let githubUserInfo = response {
+                print(githubUserInfo)
+            }
+        }
         
         
         
@@ -225,7 +258,12 @@ class AnotherViewController: UIViewController {
         */
         
         var httpBinRequest = HttpBinInfoRequest()
-        httpBinRequest.rquestInfo()
+//        httpBinRequest.rquestInfo()
+        URLSessionClient.request(httpBinRequest) { (response) in
+            if let httpBinInfo = response {
+                print(httpBinInfo)
+            }
+        }
         
     }
     
