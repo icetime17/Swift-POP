@@ -11,7 +11,7 @@ import UIKit
 // POP
 
 // https://api.onevcat.com/users/onevcat
-struct User {
+private struct User {
     let name: String
     let message: String
     
@@ -31,13 +31,13 @@ struct User {
 
 // MARK: -
 // 使用POP的方式从URL请求数据，并生成对应的User。
-enum HTTPMethod: String {
+private enum HTTPMethod: String {
     case GET
     case POST
 }
 
 // 规定Request所需的参数
-protocol Request {
+private protocol Request {
     var host: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
@@ -81,7 +81,7 @@ protocol Request {
 // MARK: -
 // 继续Request协议，则Request规定的属性全部都要实现
 // 而UserRequest的初始化与Request的属性无关。
-struct UserRequest: Request {
+private struct UserRequest: Request {
     let name: String
     
     let host = "https://api.onevcat.com"
@@ -105,7 +105,7 @@ struct UserRequest: Request {
 // MARK: -
 // 通过Client协议，将send与Request分离，而sender需要的参数r为遵循Request协议的对象
 // 闭包接收的参数为Response，该Response继承了Decodable协议（包含parse方法）
-protocol Client {
+private protocol Client {
     var host: String { get }
     
     // 因Request含有关联类型（associatedtype Response）,所以不能作为独立类型使用。
@@ -113,7 +113,7 @@ protocol Client {
 }
 
 // 将send，parse，请求本身分离
-struct URLSessionClient: Client {
+private struct URLSessionClient: Client {
     let host = "https://api.onevcat.com"
     
     // send方法接收参数r为继承了T的对象，即继承Request的对象，必须使用T: Request这种方式
@@ -138,7 +138,7 @@ struct URLSessionClient: Client {
 }
 
 // 在Request的Response关联类型中加上Decodable协议，则所有的Response都可对数据进行解析。
-protocol Decodable {
+private protocol Decodable {
     static func parse(data: Data) -> Self?
 }
 
@@ -167,7 +167,7 @@ class ViewController: UIViewController {
         // 即：Request，send，parse分离
         URLSessionClient().send(UserRequest(name: "onevcat")) { (user) in
             if let user = user {
-                print("\(user.message) from \(user.name)")
+                print(">>>>>> \(user.message) from \(user.name)")
             }
         }
     }
