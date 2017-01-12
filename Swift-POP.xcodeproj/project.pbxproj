@@ -13,6 +13,7 @@
 		A4A4DE591DFA95CF000A5349 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4A4DE581DFA95CF000A5349 /* Assets.xcassets */; };
 		A4A4DE5C1DFA95CF000A5349 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A4DE5A1DFA95CF000A5349 /* LaunchScreen.storyboard */; };
 		A4A4DE671DFA95CF000A5349 /* Swift_POPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A4DE661DFA95CF000A5349 /* Swift_POPTests.swift */; };
+		A4F9E02A1E27214C0073423E /* AnotherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9E0291E27214C0073423E /* AnotherViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		A4A4DE621DFA95CF000A5349 /* Swift-POPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift-POPTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A4DE661DFA95CF000A5349 /* Swift_POPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_POPTests.swift; sourceTree = "<group>"; };
 		A4A4DE681DFA95CF000A5349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4F9E0291E27214C0073423E /* AnotherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnotherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				A4A4DE511DFA95CF000A5349 /* AppDelegate.swift */,
 				A4A4DE531DFA95CF000A5349 /* ViewController.swift */,
+				A4F9E0291E27214C0073423E /* AnotherViewController.swift */,
 				A4A4DE551DFA95CF000A5349 /* Main.storyboard */,
 				A4A4DE581DFA95CF000A5349 /* Assets.xcassets */,
 				A4A4DE5A1DFA95CF000A5349 /* LaunchScreen.storyboard */,
@@ -203,6 +206,7 @@
 			files = (
 				A4A4DE541DFA95CF000A5349 /* ViewController.swift in Sources */,
 				A4A4DE521DFA95CF000A5349 /* AppDelegate.swift in Sources */,
+				A4F9E02A1E27214C0073423E /* AnotherViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +414,7 @@
 				A4A4DE6D1DFA95CF000A5349 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4A4DE6E1DFA95CF000A5349 /* Build configuration list for PBXNativeTarget "Swift-POPTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +423,7 @@
 				A4A4DE701DFA95CF000A5349 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
