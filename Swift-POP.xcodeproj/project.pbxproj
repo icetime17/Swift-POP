@@ -16,6 +16,9 @@
 		A4F9E02A1E27214C0073423E /* AnotherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9E0291E27214C0073423E /* AnotherViewController.swift */; };
 		A4F9E02C1E2872B60073423E /* ShakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9E02B1E2872B60073423E /* ShakeViewController.swift */; };
 		A4F9E02E1E2873580073423E /* Model.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F9E02D1E2873580073423E /* Model.png */; };
+		A4F9E0301E2879900073423E /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9E02F1E2879900073423E /* MyTableViewController.swift */; };
+		A4F9E0331E287AD10073423E /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F9E0311E287AD10073423E /* MyTableViewCell.swift */; };
+		A4F9E0341E287AD10073423E /* MyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4F9E0321E287AD10073423E /* MyTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,9 @@
 		A4F9E0291E27214C0073423E /* AnotherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnotherViewController.swift; sourceTree = "<group>"; };
 		A4F9E02B1E2872B60073423E /* ShakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeViewController.swift; sourceTree = "<group>"; };
 		A4F9E02D1E2873580073423E /* Model.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Model.png; sourceTree = "<group>"; };
+		A4F9E02F1E2879900073423E /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
+		A4F9E0311E287AD10073423E /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		A4F9E0321E287AD10073423E /* MyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,9 @@
 				A4F9E0291E27214C0073423E /* AnotherViewController.swift */,
 				A4F9E02B1E2872B60073423E /* ShakeViewController.swift */,
 				A4F9E02D1E2873580073423E /* Model.png */,
+				A4F9E02F1E2879900073423E /* MyTableViewController.swift */,
+				A4F9E0311E287AD10073423E /* MyTableViewCell.swift */,
+				A4F9E0321E287AD10073423E /* MyTableViewCell.xib */,
 				A4A4DE551DFA95CF000A5349 /* Main.storyboard */,
 				A4A4DE581DFA95CF000A5349 /* Assets.xcassets */,
 				A4A4DE5A1DFA95CF000A5349 /* LaunchScreen.storyboard */,
@@ -190,6 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4F9E0341E287AD10073423E /* MyTableViewCell.xib in Resources */,
 				A4A4DE5C1DFA95CF000A5349 /* LaunchScreen.storyboard in Resources */,
 				A4F9E02E1E2873580073423E /* Model.png in Resources */,
 				A4A4DE591DFA95CF000A5349 /* Assets.xcassets in Resources */,
@@ -214,7 +224,9 @@
 				A4A4DE541DFA95CF000A5349 /* ViewController.swift in Sources */,
 				A4A4DE521DFA95CF000A5349 /* AppDelegate.swift in Sources */,
 				A4F9E02A1E27214C0073423E /* AnotherViewController.swift in Sources */,
+				A4F9E0301E2879900073423E /* MyTableViewController.swift in Sources */,
 				A4F9E02C1E2872B60073423E /* ShakeViewController.swift in Sources */,
+				A4F9E0331E287AD10073423E /* MyTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
