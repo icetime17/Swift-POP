@@ -14,17 +14,18 @@ extension UITableView {
 //        register(nib, forCellReuseIdentifier: MyTableViewCell.reuseIdentifier)
 //    }
     
-    func register<T: UITableViewCell where T: ReusableView, T: NibLoadable>(_: T.Type) {
+    func register<T: UITableViewCell>(_: T.Type) where T: ReusableView, T: NibLoadable {
         let nib = UINib(nibName: T.nibName, bundle: nil)
         register(nib, forCellReuseIdentifier: T.reuseIdentifier)
     }
     
-    func dequeueReusableCell<T: UITableViewCell where T: ReusableView>(forIndexPath indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(forIndexPath indexPath: IndexPath) -> T where T: ReusableView {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
-            fatalError("Could not dequeue cell with identifier \(T.reuseIdentifier)")
+            fatalError("CSSwiftExtension: Could not dequeue cell with identifier \(T.reuseIdentifier)")
         }
         return cell
     }
+    
 }
 
 class MyTableViewController: UIViewController {
